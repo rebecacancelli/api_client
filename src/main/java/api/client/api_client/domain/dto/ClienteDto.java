@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientDto {
+public class ClienteDto {
     Long id;
     String nome;
     String cpf;
     String sexo;
     Date data_nascimento;
+    EnderecoDto endereco;
 }

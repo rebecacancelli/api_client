@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import api.client.api_client.domain.dto.ClientDto;
+import api.client.api_client.domain.dto.ClienteDto;
 import api.client.api_client.domain.dto.ResponseDto;
-import api.client.api_client.domain.entity.Client;
+import api.client.api_client.domain.entity.Cliente;
 import api.client.api_client.domain.enumeration.Status;
-import api.client.api_client.domain.repository.ClientRepository;
+import api.client.api_client.domain.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class ClientService {
+public class ClienteService {
 
     @Autowired
     private ModelMapper modelMapper;
@@ -25,31 +25,31 @@ public class ClientService {
     @Autowired
     private ResponseDto responseDto;
 
-    ClientRepository clientRepository;
+    ClienteRepository clienteRepository;
 
-    public ResponseDto saveClient(Client client) {
-        responseDto.setId(clientRepository.save(client).getId());
+    public ResponseDto saveCliente(Cliente cliente) {
+        responseDto.setId(clienteRepository.save(cliente).getId());
         responseDto.setMessage("Usuário incluído com sucesso...");
         responseDto.setStatus(Status.SUCESS.value());
         return responseDto;
     }
 
-    public List<ClientDto> getAllClientOrderByName() {
-        List<ClientDto> listAllClientDto = clientRepository.findAll(Sort.by(Sort.Direction.ASC, "nome")).stream()
-                .map(Client -> modelMapper.map(Client, ClientDto.class))
+    public List<ClienteDto> getAllClienteOrderByName() {
+        List<ClienteDto> listAllClienteDto = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "nome")).stream()
+                .map(Cliente -> modelMapper.map(Cliente, ClienteDto.class))
                 .collect(Collectors.toList());
-        return listAllClientDto;
+        return listAllClienteDto;
     }
 
-    public ClientDto getClientById(Long id) {
-        return modelMapper.map(clientRepository.findById(id).get(), ClientDto.class);
+    public ClienteDto getClienteById(Long id) {
+        return modelMapper.map(clienteRepository.findById(id).get(), ClienteDto.class);
 
     }
 
-    public ResponseDto updateClient(Client client) {
+    public ResponseDto updateCliente(Cliente cliente) {
         
-        if (client.getId() > 0 && clientRepository.existsById(client.getId())) {
-            clientRepository.save(client);
+        if (cliente.getId() > 0 && clienteRepository.existsById(cliente.getId())) {
+            clienteRepository.save(cliente);
             responseDto.setMessage("Usuário alterado com sucesso...");
             responseDto.setStatus(Status.SUCESS.value());
         } else {
@@ -59,10 +59,10 @@ public class ClientService {
         return responseDto;
     }
     
-    public ResponseDto deleteClient(Long id) {
+    public ResponseDto deleteCliente(Long id) {
         responseDto.setId(id);
         if (id > 0) {
-            clientRepository.deleteById(id);
+            clienteRepository.deleteById(id);
             responseDto.setMessage("Usuário deletado com sucesso...");
             responseDto.setStatus(Status.SUCESS.value());
         } else {

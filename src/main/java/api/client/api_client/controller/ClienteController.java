@@ -14,44 +14,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import api.client.api_client.domain.dto.ClientDto;
+import api.client.api_client.domain.dto.ClienteDto;
 import api.client.api_client.domain.dto.ResponseDto;
-import api.client.api_client.domain.entity.Client;
-import api.client.api_client.domain.service.ClientService;
+import api.client.api_client.domain.entity.Cliente;
+import api.client.api_client.domain.service.ClienteService;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/client")
-public class ClientController {
+@RequestMapping("/cliente")
+public class ClienteController {
     
     @Autowired
-    private ClientService clientService;
+    private ClienteService clienteService;
 
-    @PostMapping //http:localhost:8080/client/
+    @PostMapping //http:localhost:8080/cliente/
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDto saveClient(@Valid @RequestBody Client client) {
-        return clientService.saveClient(client);
+    public ResponseDto saveCliente(@Valid @RequestBody Cliente cliente) {
+        return clienteService.saveCliente(cliente);
     }
 
     @GetMapping(value="/list") // http:localhost:8080/client/list
-    public List<ClientDto> getAllCient() {
-        return clientService.getAllClientOrderByName();
+    public List<ClienteDto> getAllCiente() {
+        return clienteService.getAllClienteOrderByName();
     }
 
     @GetMapping(value = "/{id}")
-    public ClientDto getUserById(@PathVariable Long id) {
-    return clientService.getClientById(id);  
+    public ClienteDto getUserById(@PathVariable Long id) {
+    return clienteService.getClienteById(id);  
   }
 
     @PutMapping
-    public ResponseDto updateClient(@Valid @RequestBody Client client) {
-        return clientService.updateClient(client);
+    public ResponseDto updateCliente(@Valid @RequestBody Cliente cliente) {
+        return clienteService.updateCliente(cliente);
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseDto deleteClient(@PathVariable Long id ) {
-        return clientService.deleteClient(id);
+    public ResponseDto deleteCliente(@PathVariable Long id ) {
+        return clienteService.deleteCliente(id);
     }
 
 

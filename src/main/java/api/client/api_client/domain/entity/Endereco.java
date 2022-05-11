@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -15,11 +16,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "address")
+@Table(name = "endereco")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -40,7 +41,6 @@ public class Address {
     String bairro;
 
     @Column(name="numero")
-    @NotBlank(message = "Numero é obrigatório")
     Integer numero;
 
     @Column(name="cidade")
@@ -52,4 +52,7 @@ public class Address {
     @NotBlank(message = "UF é obrigatório")
     @Length(message="XX",max=4)
     String uf;
+
+    @OneToOne(mappedBy = "endereco")
+    Cliente cliente;
 }

@@ -8,7 +8,7 @@ GRANT ALL PRIVILEGES ON banco.* TO 'root' @'localhost';
 -- Acesar o banco de dados: banco
 USE banco;
 -- Criar a tabela: client
-CREATE TABLE client(
+CREATE TABLE cliente(
     id int AUTO_INCREMENT,
     nome varchar(50) NOT NULL,
     cpf varchar(14) NOT NULL,
@@ -16,12 +16,12 @@ CREATE TABLE client(
     data_nascimento date,
     endereco_id int,
     PRIMARY KEY (id),
-    FOREIGN KEY (endereco_id) REFERENCES addresss (id)
+    FOREIGN KEY (endereco_id) REFERENCES endereco (id)
 );
 
 USE banco;
 
-CREATE TABLE addresss(
+CREATE TABLE endereco(
     id int AUTO_INCREMENT,
     cep varchar(9) NOT NULL,
     rua varchar(50) NOT NULL,
@@ -31,3 +31,6 @@ CREATE TABLE addresss(
     uf varchar(4) NOT NULL,
     PRIMARY KEY (id)
 )
+
+USE banco;
+drop TABLE client;

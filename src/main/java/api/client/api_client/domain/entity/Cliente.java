@@ -2,13 +2,14 @@ package api.client.api_client.domain.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -20,12 +21,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "client")
-@SecondaryTable(name="address")
+@Table(name = "cliente")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -49,7 +49,7 @@ public class Client {
     @Column(name="data_nascimento")
     Date data_nascimento;
 
-    @Column(name="address")
-    @OneToOne
-    Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="endereco_id", referencedColumnName = "id")
+    Endereco endereco;
 }
